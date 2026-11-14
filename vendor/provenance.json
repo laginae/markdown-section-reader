@@ -1,0 +1,11 @@
+{
+  "cozyVersion": "1.7.3",
+  "coreVersion": "0.2.3",
+  "files": {
+    "cozy/system-tts.js": "1ecf4001a221277f1e51d651615f5af0c47986a6d0494aecc8be5216026e8adc",
+    "cozy/mimo-tts.js": "470fd23fbaf5cbad899e5894d7a90efcd5cf92e1e02b4d06cfa7af95a7b8ad06",
+    "cozy/audio-export.js": "a2505874a463647f5f16ab1073550fa85a1ff3ab13e0244ac7ca4f0f43ffac3a",
+    "cozy/markdown-syntax.js": "a01179170367af657d6a82362ed52b601c73167ab9660738c64a32f1815c98c7",
+    "core/semantic-chunker.js": "9cceab68fbc2f4423fae0e39a97ebe76f81d929080dc87f52b68e5f412e9286c"
+  }
+}

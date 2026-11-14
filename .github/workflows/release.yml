@@ -1,0 +1,57 @@
+name: Test and verify extension release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.15.0'
+      - name: Install, test and package
+        run: |
+          npm ci --ignore-scripts
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm test
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run package
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify published VSIX
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          $version = node -p 'require("./package.json").version'
+          if ($env:RELEASE_TAG -ne $version) { throw 'Release tag does not match package version' }
+          $name = "markdown-section-reader-$version.vsix"
+          gh release download $env:RELEASE_TAG --repo $env:REPOSITORY --dir published --pattern $name
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $local = (Get-FileHash -LiteralPath "dist/$name" -Algorithm SHA256).Hash
+          $remote = (Get-FileHash -LiteralPath "published/$name" -Algorithm SHA256).Hash
+          if ($local -ne $remote) { throw 'Published VSIX differs from the source build' }
+          "$name SHA256 $local" >> $env:GITHUB_STEP_SUMMARY
+      - name: Attest verified VSIX
+        if: github.event_name == 'release'
+        uses: actions/attest-build-provenance@43d14bc2b83dec42d39ecae14e916627a18bb661
+        with:
+          subject-path: dist/*.vsix

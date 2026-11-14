@@ -1,0 +1,9 @@
+node_modules/
+out/
+dist/
+qa/
+media/katex/
+media/renderers/
+*.log
+*.vsix
+.env*

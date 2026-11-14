@@ -1,0 +1,163 @@
+{
+  "version": "1.7.7",
+  "sourceCommit": "bf82c329bbd7753eadc99f29f76cf1bb5738c4bf",
+  "coreVersion": "0.3.1",
+  "coreCommit": "f0e6195fdda69e49c1bb54c21c0187eb005b6322",
+  "coreFiles": [
+    {
+      "file": "src/academic-speech.js",
+      "sha256": "d7b64609a008862e381feacf99c9a615a42eb4d5e49f368629104236c7600790"
+    },
+    {
+      "file": "src/math-collections.js",
+      "sha256": "ae83448da7be59f1c68258a7a3b915c14167fb70200801b8a01adba8f0285865"
+    },
+    {
+      "file": "src/math-fractions.js",
+      "sha256": "7cf748d297ce531f013b2b08b486f3bd5bfaabcd5b4bdb0364648e14b4d415bb"
+    },
+    {
+      "file": "src/math-functions.js",
+      "sha256": "b8efcb934e0e2b7cb807cfb93b43a6ada628598231390045c71da6a4b1d62307"
+    },
+    {
+      "file": "src/math-symbols.js",
+      "sha256": "c3eeeca5097acbff11f1cacf5e5d007882f01ad527ae6616e4df981763ed4d3c"
+    },
+    {
+      "file": "src/math-variable-labels.js",
+      "sha256": "fbbbc76f71eccc7b964dfb9f7ebd255f84028293e13e1b436abf815591cb9b83"
+    },
+    {
+      "file": "src/pdf-layout.js",
+      "sha256": "f764d8f6696dabcdb58ea1ff5dd16ccefb25121c0840ba3b1a7a2e95fbe40c66"
+    },
+    {
+      "file": "src/playback-queue.js",
+      "sha256": "72da68a951f25d8f55ff0e8ae5c2b59075a242c5af80e772525f48a281274e03"
+    },
+    {
+      "file": "src/reading-position.js",
+      "sha256": "dc76c7fef8d1043ee9984caffaeb29a1c18431655daf490888897a98e97992d3"
+    },
+    {
+      "file": "src/semantic-chunker.js",
+      "sha256": "9cceab68fbc2f4423fae0e39a97ebe76f81d929080dc87f52b68e5f412e9286c"
+    },
+    {
+      "file": "src/structured-math.js",
+      "sha256": "ca3fd95eb95a4e9bd22a7fe8e5039344fc3d47ff77b82dd448c6fbd2de928c36"
+    },
+    {
+      "file": "src/task-state.js",
+      "sha256": "803197719eaa48695c33c1f1c6ec992297d26906e1bc56ef309afd2c6526a9f8"
+    },
+    {
+      "file": "src/text-cleaning.js",
+      "sha256": "3c3e917fb0737d7af605703ee461e15f091c63ed662a2f8996098edcbb0f3e13"
+    },
+    {
+      "file": "test/math-golden-fixtures.cjs",
+      "sha256": "2a881c088b8c59fdfd637bc9af9f5c2f599224df8581a1ad73c99b88ee92d6a2"
+    },
+    {
+      "file": "test/pdf-golden-fixtures.cjs",
+      "sha256": "c088a29a7f3cb65e3d9f7b129e43b0e1cead2a9e73234aa748741e9e1730a79a"
+    },
+    {
+      "file": "index.js",
+      "sha256": "829402b6a66e705312e474e7880faefe2e8f9b383571d880ffdf7db448605a28"
+    },
+    {
+      "file": "package.json",
+      "sha256": "dcb89f1e583a8e6011d7567753a64d6dbc210dd1aa3da62b1f7a0527139bc288"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "a9d2578d42f61df71a23238c9d2526fda8634a0bfed6bf08580de5a7f87edbbb"
+    }
+  ],
+  "sourceRepository": "https://github.com/laginae/note-reader-cosyvoice",
+  "snapshotNote": "Commit-pinned source snapshot, not a claim of a new upstream release.",
+  "license": "MIT",
+  "modules": [
+    {
+      "file": "academic-speech.js",
+      "sourceSha256": "5dd71928ee8f618a5d7f817bc9d913d782e13c138f94d1f27ea3e95b96ee37aa",
+      "vendoredSha256": "c2adcc520841a27d4e0e510be5a72876f4a31eb48a8d00d7a5c046a2d80ea843",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "structured-math.js",
+      "sourceSha256": "1bbad0109328b453c2dc9c828b07b4ca2ec0611a644facd21218f0f741e5ffd2",
+      "vendoredSha256": "f759ccf3bc57674ced24d2cf77f42626e921ec9230bddb637824be2ebb668652",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "math-symbols.js",
+      "sourceSha256": "5cb2c0c661cbf66e6d3af2f76a12f06d696eac8a20d01d3cdab0cbcdde9b980d",
+      "vendoredSha256": "07e31ebdb76810670a43692e8a773e42c6652b7afbd88c617753109f01931bf1",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "math-functions.js",
+      "sourceSha256": "94b284db90b6800e6fbfdc9e6edfb1deceba5927ebcaaf33801a1523ecfbc08b",
+      "vendoredSha256": "f579503aaeba52f07cfc414f9db42faa9cdd51da27333d1faac91f6b8783cd89",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "math-variable-labels.js",
+      "sourceSha256": "eb87750fc3b83c236b0d661cd7ac56b9a59ce86338dee5711f9f34e929b7913a",
+      "vendoredSha256": "ea95fab8e57c61cdb2eb9f9524d677c5dc25dbd7f0f566d05db8779e255e6818",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "math-collections.js",
+      "sourceSha256": "4701a9a993b1b24a5f80c08eed94323c2ba944ce9e595da5ea42b3e8e2df2ead",
+      "vendoredSha256": "8f23cc8417bae2837577125f8fc831b670aa6fd7bf7139c0736f249952409fec",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "math-fractions.js",
+      "sourceSha256": "fdedf32227de39e4f8cd2594fd75a510faa18e67ff2d0055e8f2d5ae631e2c8a",
+      "vendoredSha256": "2dcdff8d5c26d191f66554d5046144a70e7ed3e8c40cae48fb71842ab90e6e36",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "speech-options.js",
+      "sourceSha256": "5abad313571172ecedd1e26990350d8dd95d2cbd0e3c2748ee411e0d2386ea1e",
+      "vendoredSha256": "5abad313571172ecedd1e26990350d8dd95d2cbd0e3c2748ee411e0d2386ea1e",
+      "adaptation": null
+    },
+    {
+      "file": "speech-parts.js",
+      "sourceSha256": "84d6bd538c97fe02442bbccb2d7789e974960ca168e772146f1b35174ebad317",
+      "vendoredSha256": "84d6bd538c97fe02442bbccb2d7789e974960ca168e772146f1b35174ebad317",
+      "adaptation": null
+    },
+    {
+      "file": "semantic-chunker.js",
+      "sourceSha256": "de4f0032597bee887bc5e63c3b4f9cf5d15893db70a68b004a293d353410feb0",
+      "vendoredSha256": "86a381e1c213337223b06ce58820062ac12103c952e71ff9e5a03fcd296daf65",
+      "adaptation": "Replace npm core imports with the bundled portable core."
+    },
+    {
+      "file": "playback-estimate.js",
+      "sourceSha256": "864eb889be8cd1edffb007a734859a849dafc873cf6e25b69102448b127f84da",
+      "vendoredSha256": "864eb889be8cd1edffb007a734859a849dafc873cf6e25b69102448b127f84da",
+      "adaptation": null
+    },
+    {
+      "file": "listening-buffer.js",
+      "sourceSha256": "ef6cb0b5c5c2ff381254a23ee46a9e3056ef745ae5644f79fa255891401aaad9",
+      "vendoredSha256": "ef6cb0b5c5c2ff381254a23ee46a9e3056ef745ae5644f79fa255891401aaad9",
+      "adaptation": null
+    },
+    {
+      "file": "preparation-pool.js",
+      "sourceSha256": "2571e9f4080f5c4f6176d0f708f334295c93ec472c8b3d3e2417109b6f615b33",
+      "vendoredSha256": "2571e9f4080f5c4f6176d0f708f334295c93ec472c8b3d3e2417109b6f615b33",
+      "adaptation": null
+    }
+  ]
+}

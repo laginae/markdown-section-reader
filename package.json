@@ -1,0 +1,408 @@
+{
+  "name": "markdown-section-reader",
+  "displayName": "Markdown 目录与朗读",
+  "description": "Cozy 朗读核心：Markdown 目录、公式读法、连续播放、原文高亮和原生聊天引用。",
+  "version": "0.7.5",
+  "publisher": "local-tools",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/extension.cjs",
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onWebviewPanel:mdReader.reader"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "markdown-reader",
+          "title": "目录与朗读",
+          "icon": "media/book.svg"
+        }
+      ]
+    },
+    "views": {
+      "markdown-reader": [
+        {
+          "id": "markdown-reader.outline",
+          "name": "Markdown 目录与朗读",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "mdReader.open",
+        "title": "打开目录与朗读",
+        "category": "Markdown 朗读",
+        "icon": "$(book)"
+      },
+      {
+        "command": "mdReader.openPreview",
+        "title": "打开朗读预览",
+        "category": "Markdown 朗读",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "mdReader.toggleControls",
+        "title": "收起或展开朗读控制",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.readSection",
+        "title": "只读当前节",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.readFrom",
+        "title": "从当前节开始朗读",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.pause",
+        "title": "暂停或继续",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.stop",
+        "title": "停止朗读",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.setKey",
+        "title": "设置 MiMo 密钥",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.importObsidianKey",
+        "title": "从 Obsidian 导入 MiMo 密钥",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.chooseVoice",
+        "title": "选择语音",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.copyPreviewSelectionReference",
+        "title": "复制预览选区的提问引用",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.readFromPreviewSelection",
+        "title": "从选中位置开始朗读",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.addPreviewSelectionToChat",
+        "title": "将预览选区添加到原生聊天（行范围卡片）",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.previous",
+        "title": "上一音频片段",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.next",
+        "title": "下一音频片段",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.seekBackward",
+        "title": "后退五秒",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.seekForward",
+        "title": "前进五秒",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.configure",
+        "title": "打开朗读设置",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.clearAudioCache",
+        "title": "清除本次运行的音频缓存",
+        "category": "Markdown 朗读"
+      },
+      {
+        "command": "mdReader.importCozySettings",
+        "title": "从 Obsidian 导入 Cozy 朗读设置",
+        "category": "Markdown 朗读"
+      }
+    ],
+    "menus": {
+      "webview/context": [
+        {
+          "command": "mdReader.readFromPreviewSelection",
+          "when": "webviewId == mdReader.preview && webviewSection == markdownReader && mdReaderReadAvailable",
+          "group": "1_mdReader@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "mdReader.readFromPreviewSelection",
+          "when": "false"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "mdReader.open",
+          "when": "resourceLangId == markdown",
+          "group": "navigation@5"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "mdReader.readSection",
+          "when": "editorLangId == markdown",
+          "group": "mdReader@1"
+        },
+        {
+          "command": "mdReader.readFrom",
+          "when": "editorLangId == markdown",
+          "group": "mdReader@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Markdown 目录与朗读",
+      "properties": {
+        "mdReader.engine": {
+          "type": "string",
+          "enum": [
+            "system",
+            "mimo"
+          ],
+          "enumDescriptions": [
+            "系统语音，离线",
+            "小米 MiMo，在线"
+          ],
+          "default": "system",
+          "scope": "application",
+          "description": "朗读引擎。MiMo 会将选定朗读范围的文字发送到小米官方语音接口。"
+        },
+        "mdReader.systemVoice": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "description": "系统语音名称。留空优先使用中文语音，可通过“选择语音”修改。"
+        },
+        "mdReader.mimoVoice": {
+          "type": "string",
+          "enum": [
+            "冰糖",
+            "茉莉",
+            "苏打",
+            "白桦",
+            "Dean",
+            "Milo",
+            "Mia",
+            "Chloe"
+          ],
+          "default": "冰糖",
+          "scope": "application"
+        },
+        "mdReader.speed": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0.5,
+          "maximum": 2,
+          "scope": "application",
+          "description": "播放倍速，立即生效。音调保持不变。"
+        },
+        "mdReader.follow": {
+          "type": "boolean",
+          "default": true,
+          "description": "播放时滚动到当前高亮段落。"
+        },
+        "mdReader.volume": {
+          "type": "number",
+          "default": 1,
+          "description": "播放音量，立即生效。",
+          "scope": "application",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mdReader.buffering": {
+          "type": "string",
+          "default": "continuous",
+          "description": "连续播放按当前范围提前准备最多三个音频片段、900 个朗读字符。停止或跳转时已经发送的在线请求可能仍消耗额度。",
+          "scope": "application",
+          "enum": [
+            "continuous",
+            "balanced",
+            "on-demand"
+          ],
+          "enumDescriptions": [
+            "连续播放，自动调节缓冲",
+            "提前准备一个片段",
+            "播完后才生成下一段"
+          ]
+        },
+        "mdReader.chunkLimit": {
+          "type": "number",
+          "default": 800,
+          "description": "单次合成文字上限；按句子和段落优先断开。",
+          "scope": "application",
+          "minimum": 120,
+          "maximum": 2000
+        },
+        "mdReader.quickStart": {
+          "type": "string",
+          "default": "standard",
+          "description": "先准备完整的开头句子，缩短起播等待。快速模式允许更短的首句，可能增加后续等待。",
+          "scope": "application",
+          "enum": [
+            "standard",
+            "rapid",
+            "off"
+          ],
+          "enumDescriptions": [
+            "标准快启",
+            "快速起播",
+            "关闭快启"
+          ]
+        },
+        "mdReader.academicMathMode": {
+          "type": "string",
+          "default": "smart",
+          "description": "公式朗读方式。智能模式自然读出可识别的简单公式，复杂公式简短提示。",
+          "scope": "application",
+          "enum": [
+            "smart",
+            "all",
+            "skip"
+          ]
+        },
+        "mdReader.academicMathStyle": {
+          "type": "string",
+          "default": "concise",
+          "description": "公式读法的详细程度。",
+          "scope": "application",
+          "enum": [
+            "concise",
+            "verbose"
+          ],
+          "enumDescriptions": [
+            "简洁",
+            "明确读出下标与括号等"
+          ]
+        },
+        "mdReader.academicIntervalStyle": {
+          "type": "string",
+          "default": "precise",
+          "scope": "application",
+          "description": "简洁模式下可靠识别的区间读法。只读起点到终点会省略开闭端点条件；完整模式不变。",
+          "enum": ["precise", "range"],
+          "enumDescriptions": ["保留端点条件（默认）", "只读起点到终点"]
+        },
+        "mdReader.academicFunctionStyle": {
+          "type": "string",
+          "default": "of",
+          "scope": "application",
+          "description": "简单函数读法。仅在简洁模式下可将 f of x 读为 f x；完整模式、正文与复杂公式规则不变。",
+          "enum": ["of", "compact"],
+          "enumDescriptions": ["保留 of：f of x（默认）", "省略 of：f x"]
+        },
+        "mdReader.academicTableMode": {
+          "type": "string",
+          "default": "smart",
+          "description": "表格按列名和值朗读；智能模式略过较大的数字表格。",
+          "scope": "application",
+          "enum": [
+            "smart",
+            "all",
+            "skip"
+          ]
+        },
+        "mdReader.academicTableRepeatHeaders": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "每行重复表头。关闭后只在开头读一次表头，后续按行读数据；空单元格保留占位，智能跳过策略不变。"
+        },
+        "mdReader.academicSkipNotice": {
+          "type": "boolean",
+          "default": true,
+          "description": "略过公式或表格时朗读简短提示。",
+          "scope": "application"
+        },
+        "mdReader.mathReadingLanguage": {
+          "type": "string",
+          "default": "chinese",
+          "description": "没有周围正文时的公式读法语言；有正文时跟随上下文。",
+          "scope": "application",
+          "enum": [
+            "chinese",
+            "english"
+          ]
+        },
+        "mdReader.speechTermsEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "启用自定义术语读法，只改变朗读文字。",
+          "scope": "application"
+        },
+        "mdReader.doubleClickRead": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "双击目录或朗读预览中的标题，从该节开始朗读。正文双击仍用于选词。"
+        },
+        "mdReader.floatingButton": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "在朗读预览右下角显示悬浮朗读按钮。播放中展开后可停止或前后移动五秒。"
+        },
+        "mdReader.showHeadingLevels": {
+          "type": "boolean",
+          "default": false,
+          "scope": "application",
+          "description": "在目录标题前显示 H1–H6 标记。关闭时仍可通过缩进、字重和悬停提示识别标题层级。"
+        },
+        "mdReader.speechTerms": {
+          "type": "string",
+          "default": "",
+          "description": "每行一条：原词=读法。例如 CVaR=条件风险价值。按完整词匹配，不递归替换，最多 100 条。",
+          "scope": "application",
+          "editPresentation": "multilineText"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node --test test/*.test.cjs",
+    "package": "npm run build && node scripts/package.cjs"
+  },
+  "dependencies": {
+    "katex": "0.19.1",
+    "markdown-it": "15.0.3",
+    "mermaid": "12.3.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "jsdom": "26.1.0"
+  }
+}
