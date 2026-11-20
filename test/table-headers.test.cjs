@@ -20,7 +20,8 @@ test('disabling repeated headers cannot disable explicit table omission', () => 
 test('the bundled core matches the pinned public-source hash manifest', () => {
   const fs = require('node:fs'), path = require('node:path'), { createHash } = require('node:crypto');
   const manifest = require('../vendor/cozy-reading-provenance.json');
-  assert.equal(manifest.coreVersion, '0.3.1'); assert.match(manifest.coreCommit, /^[a-f0-9]{40}$/);
+  assert.equal(manifest.coreVersion, require('../vendor/core/package.json').version); assert.match(manifest.coreCommit, /^[a-f0-9]{40}$/);
+  assert.ok(manifest.coreFiles.some(entry=>entry.file==='src/academic-preview.js'));
   assert.ok(manifest.coreFiles.length >= 14);
   for (const entry of manifest.coreFiles) assert.equal(createHash('sha256').update(fs.readFileSync(path.join(__dirname, '../vendor/core', entry.file))).digest('hex'), entry.sha256);
 });

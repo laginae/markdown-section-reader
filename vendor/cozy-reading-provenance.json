@@ -1,9 +1,13 @@
 {
-  "version": "1.7.7",
-  "sourceCommit": "bf82c329bbd7753eadc99f29f76cf1bb5738c4bf",
-  "coreVersion": "0.3.1",
-  "coreCommit": "f0e6195fdda69e49c1bb54c21c0187eb005b6322",
+  "version": "1.7.8",
+  "sourceCommit": "f7de1cbae2ba682d0694ae94c1622d73aedb75a1",
+  "coreVersion": "0.3.2",
+  "coreCommit": "18ffde5ef9b723a1244970e35d39e4ea70602c48",
   "coreFiles": [
+    {
+      "file": "src/academic-preview.js",
+      "sha256": "34d8b1933a25113dd418ea798f7e9ab2a952e526eeff2bc0d285a9b7d9a14b14"
+    },
     {
       "file": "src/academic-speech.js",
       "sha256": "d7b64609a008862e381feacf99c9a615a42eb4d5e49f368629104236c7600790"
@@ -66,11 +70,11 @@
     },
     {
       "file": "index.js",
-      "sha256": "829402b6a66e705312e474e7880faefe2e8f9b383571d880ffdf7db448605a28"
+      "sha256": "8a5ada32053c643341721a1745d32e88a3aefab02f9f499e377bef4dfab5966b"
     },
     {
       "file": "package.json",
-      "sha256": "dcb89f1e583a8e6011d7567753a64d6dbc210dd1aa3da62b1f7a0527139bc288"
+      "sha256": "460f5c8b9c265eee82e0e18c1d78e218d718ca9a422430c989028d9648e93918"
     },
     {
       "file": "LICENSE",
@@ -143,8 +147,8 @@
     },
     {
       "file": "playback-estimate.js",
-      "sourceSha256": "864eb889be8cd1edffb007a734859a849dafc873cf6e25b69102448b127f84da",
-      "vendoredSha256": "864eb889be8cd1edffb007a734859a849dafc873cf6e25b69102448b127f84da",
+      "sourceSha256": "25b45157c46bb70ca00cbb524ec3431d621cc691e9ee807a6eb6789aec75807b",
+      "vendoredSha256": "25b45157c46bb70ca00cbb524ec3431d621cc691e9ee807a6eb6789aec75807b",
       "adaptation": null
     },
     {

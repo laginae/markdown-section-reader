@@ -38,3 +38,5 @@ details .toolbar { margin-top: 10px; }
   details label:not(.check-setting) { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
   details label:not(.check-setting) select, details label:not(.check-setting) input { box-sizing: border-box; width: 100%; min-width: 0; }
 }
+#academic-preview { grid-column: 1 / -1; min-width: 0; }
+#academic-preview dd { margin: 2px 0 8px; white-space: pre-line; overflow-wrap: anywhere; }

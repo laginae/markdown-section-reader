@@ -3,7 +3,7 @@ const vscode = require('vscode');
 const path = require('node:path');
 const { randomBytes } = require('node:crypto');
 const { parseMarkdown, sectionAt } = require('./markdown.cjs');
-const { makeReadingPlan, normalizeReadingSettings } = require('./speech-plan.cjs');
+const { makeReadingPlan, normalizeReadingSettings, academicPreview } = require('./speech-plan.cjs');
 const { AudioPreparation, AudioCache } = require('./audio-preparation.cjs');
 const { synthesize, listSystemVoices, importObsidianSecret, readObsidianSpeechPreferences } = require('./speech.cjs');
 const { buildPreview } = require('./preview.cjs');
@@ -549,6 +549,7 @@ function activate(context) {
       <label>区间读法<select id="academicIntervalStyle"><option value="precise">保留端点条件</option><option value="range">起点到终点</option></select></label>
       <label>简单函数读法<select id="academicFunctionStyle"><option value="of">保留 of：f of x</option><option value="compact">省略 of：f x</option></select></label>
       <label class="check-setting"><input id="academicTableRepeatHeaders" type="checkbox">每行重复表头</label>
+      <details id="academic-preview"><summary>实际读法预览（本地文字）</summary><dl></dl></details>
       <label>起播<select id="quickStart"><option value="standard">标准快启</option><option value="rapid">快速起播</option><option value="off">完整片段</option></select></label>
       <label class="check-setting"><input id="doubleClickRead" type="checkbox">双击标题从本节开始朗读</label>
       <label class="check-setting"><input id="floatingButton" type="checkbox">在朗读预览中显示悬浮按钮</label>
@@ -559,6 +560,10 @@ function activate(context) {
       v.webview.onDidReceiveMessage(safe(async m => {
         if (!m || typeof m.type !== 'string') return;
         if (m.type === 'ready') { ready = true; update(); return; }
+        if (m.type === 'academicPreview') {
+          const rows=academicPreview(readSettings({speechTermsEnabled:false,speechTerms:''}));
+          v.webview.postMessage({type:'academicPreview',rows}); return;
+        }
         if (m.type === 'collapse') { await setControlsCollapsed(m.value); return; }
         if (m.type === 'preview') { await openPreview(); return; }
         if (['playing', 'paused', 'time', 'ended', 'audioError', 'audioBlocked'].includes(m.type)) { if (session?.surface === 'reader') onAudioMessage(m); return; }

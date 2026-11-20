@@ -101,4 +101,13 @@ function makeReadingPlan(parsed, section, mode, input = {}, position) {
   });
   return { queue, segmentCount: chunks.length, settings };
 }
-module.exports = { normalizeReadingSettings, makeReadingPlan, spokenBlock, rangesFor };
+function academicPreview(input) {
+  const { academicPreviewSamples } = require('../vendor/core/src/academic-preview');
+  const { parseMarkdown } = require('./markdown.cjs');
+  return academicPreviewSamples('chinese').map(([label, sample]) => {
+    const parsed = parseMarkdown(sample);
+    const plan = makeReadingPlan(parsed, {from:0,to:parsed.length}, 'section', input);
+    return [label, plan.queue.map(part=>part.text).join(' ') || '（略过）'];
+  });
+}
+module.exports = { normalizeReadingSettings, makeReadingPlan, spokenBlock, rangesFor, academicPreview };

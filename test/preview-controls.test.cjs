@@ -114,6 +114,7 @@ test('悬浮开关即时隐藏，再开启时保留当前播放会话', t => {
 test('目录双击沿用当前章节与播放入口，关闭开关后单击和双击均保留导航', t => {
   const ids = ['file','status','engine','pause','stop','read','from','preview','speed','volume','buffering','academicMathMode','academicMathStyle','academicIntervalStyle','academicFunctionStyle','academicTableRepeatHeaders','quickStart','doubleClickRead','floatingButton','showHeadingLevels','previous','next','backward','forward','controls','collapse','compact-playback','compact-pause','compact-stop','compact-status','notice','outline','voice','setup','configure','import-cozy'];
   const dom=new JSDOM(ids.map(id=>`<${id==='outline'?'main':id==='engine'?'select':'button'} id="${id}"></${id==='outline'?'main':id==='engine'?'select':'button'}>`).join(''),{runScripts:'outside-only'});
+  dom.window.document.body.insertAdjacentHTML('beforeend','<details id="academic-preview"><summary>Preview</summary><dl></dl></details>');
   t.after(()=>dom.window.close()); const win=dom.window,messages=[];let primed=0;
   win.acquireVsCodeApi=()=>({setState:()=>{},postMessage:m=>messages.push(m)});
   win.MarkdownReaderPlayer=()=>({prime:()=>primed++,resume:()=>{},handle:()=>{}});

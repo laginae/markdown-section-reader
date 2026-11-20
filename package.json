@@ -2,7 +2,7 @@
   "name": "markdown-section-reader",
   "displayName": "Markdown 目录与朗读",
   "description": "Cozy 朗读核心：Markdown 目录、公式读法、连续播放、原文高亮和原生聊天引用。",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "publisher": "local-tools",
   "license": "MIT",
   "engines": {
